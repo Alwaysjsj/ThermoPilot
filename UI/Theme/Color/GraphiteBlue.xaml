@@ -1,0 +1,70 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:System="clr-namespace:System;assembly=mscorlib">
+
+    
+    <!--一级元素-->
+    <SolidColorBrush x:Key="FirstBackColor" Color="#172033"/>
+    <SolidColorBrush x:Key="FirstForeColor" Color="#F3F6FA"/>
+    <System:Double x:Key="FirstFontSize">18</System:Double>
+
+    <!--二级元素-->
+    <SolidColorBrush x:Key="SecondBackColor" Color="#222D42"/>
+    <SolidColorBrush x:Key="SecondForeColor" Color="#DCE5F2"/>
+    <System:Double x:Key="SecondFontSize">12</System:Double>
+    
+    <!--内容区域-->
+    <SolidColorBrush x:Key="AreaBackColor" Color="#F3F5F8"/>
+    <System:Double x:Key="ContentFontSize">14</System:Double>
+    <SolidColorBrush x:Key="ToggleButtonMouseOverColor" Color="#65D9F7"/>
+
+    <!--状态颜色-->
+    <SolidColorBrush x:Key="SuccessColor" Color="#21A366"/>
+    <SolidColorBrush x:Key="WarningColor" Color="#F4A261"/>
+    <SolidColorBrush x:Key="ErrorColor" Color="#E5484D"/>
+
+    <!--交互-->
+    <SolidColorBrush x:Key="DisabledColor" Color="#7A8494"/>
+    <SolidColorBrush x:Key="MouseOverColor" Color="#31415F"/>
+    <SolidColorBrush x:Key="SelectedColor" Color="#3B82F6"/>
+    <SolidColorBrush x:Key="SelectedIconColor" Color="#48CAE4"/>
+    <SolidColorBrush x:Key="MouseOverLightColor" Color="#E7EDF5"/>
+    
+    <!--模块状态色-->
+    <SolidColorBrush x:Key="ModuleInitColor" Color="#8792A2"/>
+    <SolidColorBrush x:Key="ModuleReadyColor" Color="#3AAFA9"/>
+    <SolidColorBrush x:Key="ModuleIdleColor" Color="#607D8B"/>
+    <SolidColorBrush x:Key="ModuleRunningColor" Color="#22A06B"/>
+    <SolidColorBrush x:Key="ModuleMaintenanceColor" Color="#8A9A5B"/>
+    <SolidColorBrush x:Key="ModuleDummyColor" Color="#C7903E"/>
+    <SolidColorBrush x:Key="ModuleHomingColor" Color="#4B9CD3"/>
+    <SolidColorBrush x:Key="ModuleTransferingColor" Color="#8B7BC8"/>
+    <SolidColorBrush x:Key="ModuleSettingColor" Color="#A855F7"/>
+    <SolidColorBrush x:Key="ModuleProcessingColor" Color="#16A085"/>
+    <SolidColorBrush x:Key="ModuleHeatingColor" Color="#F59E0B"/>
+    <SolidColorBrush x:Key="ModuleErrorColor" Color="{Binding Source={StaticResource ErrorColor},Path=Color}"/>
+    <SolidColorBrush x:Key="ModuleWarnColor" Color="{Binding Source={StaticResource WarningColor},Path=Color}"/>
+
+    <!--晶圆状态色-->
+    <SolidColorBrush x:Key="WaferNoneColor" Color="Transparent"/>
+    <SolidColorBrush x:Key="WaferCrossColor" Color="#E879F9"/>
+    <SolidColorBrush x:Key="WaferDoubleColor" Color="#FB7185"/>
+    <SolidColorBrush x:Key="WaferIdleColor" Color="#CBD5E1"/>
+    <SolidColorBrush x:Key="WaferReadyColor" Color="#60A5FA"/>
+    <SolidColorBrush x:Key="WaferBusyColor" Color="#34D399"/>
+    <SolidColorBrush x:Key="WaferCompletedColor" Color="{Binding Source={StaticResource SuccessColor},Path=Color}"/>
+    <SolidColorBrush x:Key="WaferFailedColor" Color="{Binding Source={StaticResource ErrorColor},Path=Color}"/>
+    <SolidColorBrush x:Key="WaferAbortColor" Color="{Binding Source={StaticResource WarningColor},Path=Color}"/>
+    <SolidColorBrush x:Key="WaferRemoveColor" Color="#A78BFA"/>
+    <SolidColorBrush x:Key="WaferRejectColor" Color="#991B1B"/>
+
+    <!--通用图形-->
+    <PathGeometry x:Key="RightArrowGeometry">
+        M 20 5 L 10 0 L 10 3 L 0 3 L 0 7 L 10 7 L 10 10 Z
+    </PathGeometry>
+    <PathGeometry x:Key="LeftArrowGeometry">
+        M 0 5 L 10 0 L 10 3 L 20 3 L 20 7 L 10 7 L 10 10 Z
+    </PathGeometry>
+    
+</ResourceDictionary>

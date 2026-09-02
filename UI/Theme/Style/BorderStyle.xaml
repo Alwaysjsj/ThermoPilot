@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/UI;component/Theme/MainColor.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="CommonBorderStyle" TargetType="Border">
+        <Setter Property="BorderBrush"
+                Value="{StaticResource SecondBackColor}"/>
+        <Setter Property="BorderThickness"
+                Value="1"/>
+    </Style>
+
+    <Style x:Key="MainBorderStyle" TargetType="Border" BasedOn="{StaticResource CommonBorderStyle}">
+        <Setter Property="BorderBrush"
+                Value="{StaticResource FirstForeColor}"/>
+    </Style>
+    
+</ResourceDictionary>

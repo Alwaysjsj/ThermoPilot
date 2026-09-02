@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/BorderStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/LabelStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ButtonStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/CheckBoxStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ComboBoxStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/DataGridStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/GroupBoxStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ListBoxStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ListViewStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/RadioButtonStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ScrollBarStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/TabStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/TextBlockStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/TextBoxStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/TreeViewStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/MenuStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/ToggleSwitchStyle.xaml" />
+        <ResourceDictionary Source="/UI;component/Theme/Sytle/CustomControlStyle.xaml" />
+
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

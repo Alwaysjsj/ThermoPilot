@@ -1,0 +1,422 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/UI;component/Theme/MainColor.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <!-- TreeViewItem 通用样式 -->
+    <Style x:Key="CommonTreeViewItemStyle"
+           TargetType="TreeViewItem">
+
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="TreeViewItem">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"
+                                              MinWidth="16" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+
+                        <!-- 展开 / 收起按钮 -->
+                        <ToggleButton x:Name="Expander"
+                                      ClickMode="Press"
+                                      IsChecked="{Binding Path=IsExpanded,
+                                                         RelativeSource={RelativeSource TemplatedParent}}">
+
+                            <ToggleButton.Style>
+
+                                <Style TargetType="ToggleButton">
+
+                                    <Setter Property="Focusable"
+                                            Value="False" />
+
+                                    <Setter Property="Width"
+                                            Value="16" />
+
+                                    <Setter Property="Height"
+                                            Value="16" />
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+
+                                            <ControlTemplate TargetType="ToggleButton">
+
+                                                <Border Width="15"
+                                                        Height="15"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Background="Transparent"
+                                                        SnapsToDevicePixels="True">
+
+                                                    <Path x:Name="ExpandPath"
+                                                          HorizontalAlignment="Center"
+                                                          VerticalAlignment="Center"
+                                                          Fill="{StaticResource SecondBackColor}"
+                                                          Stroke="{StaticResource SecondBackColor}"
+                                                          StrokeThickness="1">
+
+                                                        <Path.Data>
+                                                            <PathGeometry Figures="M0,0 L0,6 L6,0 z" />
+                                                        </Path.Data>
+
+                                                        <Path.RenderTransform>
+                                                            <RotateTransform Angle="135"
+                                                                             CenterX="3"
+                                                                             CenterY="3" />
+                                                        </Path.RenderTransform>
+
+                                                    </Path>
+
+                                                </Border>
+
+
+                                                <ControlTemplate.Triggers>
+
+                                                    <Trigger Property="IsMouseOver"
+                                                             Value="True">
+
+                                                        <Setter TargetName="ExpandPath"
+                                                                Property="Fill"
+                                                                Value="{StaticResource ToggleButtonMouseOverColor}" />
+
+                                                    </Trigger>
+
+
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+
+                                                        <Setter TargetName="ExpandPath"
+                                                                Property="RenderTransform">
+
+                                                            <Setter.Value>
+                                                                <RotateTransform Angle="180"
+                                                                                 CenterX="3"
+                                                                                 CenterY="3" />
+                                                            </Setter.Value>
+
+                                                        </Setter>
+
+                                                    </Trigger>
+
+                                                </ControlTemplate.Triggers>
+
+                                            </ControlTemplate>
+
+                                        </Setter.Value>
+                                    </Setter>
+
+                                </Style>
+
+                            </ToggleButton.Style>
+
+                        </ToggleButton>
+
+
+                        <!-- 当前节点标题 -->
+                        <Border x:Name="Bd"
+                                Grid.Column="1"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+
+                            <ContentPresenter x:Name="PART_Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              ContentSource="Header" />
+
+                        </Border>
+
+
+                        <!-- 子节点 -->
+                        <ItemsPresenter x:Name="ItemsHost"
+                                        Grid.Row="1"
+                                        Grid.Column="1" />
+
+                    </Grid>
+
+
+                    <ControlTemplate.Triggers>
+
+                        <!-- 没有子节点时隐藏展开按钮 -->
+                        <Trigger Property="HasItems"
+                                 Value="False">
+
+                            <Setter TargetName="Expander"
+                                    Property="Visibility"
+                                    Value="Hidden" />
+
+                        </Trigger>
+
+
+                        <!-- 未展开时隐藏子节点 -->
+                        <Trigger Property="IsExpanded"
+                                 Value="False">
+
+                            <Setter TargetName="ItemsHost"
+                                    Property="Visibility"
+                                    Value="Collapsed" />
+
+                        </Trigger>
+
+
+                        <!-- 当前节点被选中 -->
+                        <Trigger Property="IsSelected"
+                                 Value="True">
+
+                            <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="{StaticResource SelectedColor}" />
+
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource FirstForeColor}" />
+
+                        </Trigger>
+
+
+                        <!-- TreeView 失去焦点但该节点仍处于选中状态 -->
+                        <MultiTrigger>
+
+                            <MultiTrigger.Conditions>
+
+                                <Condition Property="IsSelected"
+                                           Value="True" />
+
+                                <Condition Property="IsSelectionActive"
+                                           Value="False" />
+
+                            </MultiTrigger.Conditions>
+
+                            <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="{StaticResource SecondBackColor}" />
+
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource FirstForeColor}" />
+
+                        </MultiTrigger>
+
+
+                        <!-- 禁用 -->
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+
+                            <Setter Property="Foreground"
+                                    Value="{StaticResource DisabledColor}" />
+
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+    <!-- TreeView 通用样式 -->
+    <Style x:Key="CommonTreeViewStyle"
+           BasedOn="{StaticResource {x:Type TreeView}}"
+           TargetType="TreeView">
+
+        <Setter Property="Background"
+                Value="{StaticResource AreaBackColor}" />
+
+        <Setter Property="BorderBrush"
+                Value="{StaticResource SecondBackColor}" />
+
+        <Setter Property="BorderThickness"
+                Value="1" />
+
+        <Setter Property="ItemContainerStyle"
+                Value="{StaticResource CommonTreeViewItemStyle}" />
+
+        <Setter Property="Padding"
+                Value="1" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type TreeView}">
+
+                    <Border Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <ScrollViewer x:Name="PART_ScrollViewer"
+                                      Focusable="False">
+
+                            <ItemsPresenter />
+
+                        </ScrollViewer>
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+    <!-- 默认 TreeView -->
+    <Style TargetType="TreeView"
+           BasedOn="{StaticResource CommonTreeViewStyle}" />
+
+
+    <!-- 一级节点模板 -->
+    <HierarchicalDataTemplate x:Key="RecipeFolderIcon"
+                              ItemsSource="{Binding SubNodes}">
+
+        <StackPanel Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Path Data="M10,2 L2,2 C1.447,2 1,2.447 1,3 L1,17 C1,17.553 1.447,18 2,18 L18,18 C18.553,18 19,17.553 19,17 L19,7 C19,6.447 18.553,6 18,6 L10,6 L7,3 L2,3 C1.447,3 1,2.447 1,2 z M10,6 L18,6 L18,17 L2,17 L2,3 L7,3 L10,6 z" />
+
+            <TextBlock Margin="5,5,0,0"
+                       FontSize="16"
+                       Text="{Binding Name}" />
+
+
+            <StackPanel.Resources>
+
+                <Style TargetType="Path">
+
+                    <Setter Property="Stretch"
+                            Value="Fill" />
+
+                    <Setter Property="Stroke"
+                            Value="{StaticResource SecondBackColor}" />
+
+                    <Setter Property="Width"
+                            Value="12" />
+
+                    <Setter Property="Height"
+                            Value="13" />
+
+
+                    <Style.Triggers>
+
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=TreeViewItem},
+                                                      Path=IsSelected}"
+                                     Value="True">
+
+                            <Setter Property="Stroke"
+                                    Value="{StaticResource SecondForeColor}" />
+
+                        </DataTrigger>
+
+                    </Style.Triggers>
+
+                </Style>
+
+            </StackPanel.Resources>
+
+        </StackPanel>
+
+    </HierarchicalDataTemplate>
+
+
+    <!-- 二级节点模板 -->
+    <HierarchicalDataTemplate x:Key="Second"
+                              ItemsSource="{Binding SubNodes}">
+
+        <StackPanel Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Path Data="M10,2 L2,2 C1.447,2 1,2.447 1,3 L1,17 C1,17.553 1.447,18 2,18 L18,18 C18.553,18 19,17.553 19,17 L19,7 C19,6.447 18.553,6 18,6 L10,6 L7,3 L2,3 C1.447,3 1,2.447 1,2 z M10,6 L18,6 L18,17 L2,17 L2,3 L7,3 L10,6 z" />
+
+            <TextBlock Margin="5,5,0,0"
+                       FontSize="14"
+                       Text="{Binding Name}" />
+
+            <StackPanel.Resources>
+
+                <Style TargetType="Path">
+
+                    <Setter Property="Stretch"
+                            Value="Fill" />
+
+                    <Setter Property="Stroke"
+                            Value="{StaticResource ModuleReadyColor}" />
+
+                    <Setter Property="Width"
+                            Value="12" />
+
+                    <Setter Property="Height"
+                            Value="13" />
+
+                </Style>
+
+            </StackPanel.Resources>
+
+        </StackPanel>
+
+    </HierarchicalDataTemplate>
+
+
+    <!-- 三级节点模板 -->
+    <HierarchicalDataTemplate x:Key="Third"
+                              ItemsSource="{Binding SubNodes}">
+
+        <StackPanel Height="25"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+            <Path Data="M10,2 L2,2 C1.447,2 1,2.447 1,3 L1,17 C1,17.553 1.447,18 2,18 L18,18 C18.553,18 19,17.553 19,17 L19,7 C19,6.447 18.553,6 18,6 L10,6 L7,3 L2,3 C1.447,3 1,2.447 1,2 z M10,6 L18,6 L18,17 L2,17 L2,3 L7,3 L10,6 z" />
+
+            <TextBlock Margin="5,5,0,0"
+                       FontSize="14"
+                       Text="{Binding Name}" />
+
+            <StackPanel.Resources>
+
+                <Style TargetType="Path">
+
+                    <Setter Property="Stretch"
+                            Value="Fill" />
+
+                    <Setter Property="Stroke"
+                            Value="{StaticResource SelectedColor}" />
+
+                    <Setter Property="Width"
+                            Value="12" />
+
+                    <Setter Property="Height"
+                            Value="13" />
+
+                </Style>
+
+            </StackPanel.Resources>
+
+        </StackPanel>
+
+    </HierarchicalDataTemplate>
+
+</ResourceDictionary>
