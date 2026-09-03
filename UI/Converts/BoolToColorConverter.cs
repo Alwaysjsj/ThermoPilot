@@ -1,22 +1,23 @@
-﻿using System;
+﻿using System.Windows;
+using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows;
+using System.Windows.Media;
 
 namespace UI.Converts
 {
-    public class InverseBooleanToVisibilityConverter : IValueConverter
+    public class BoolToColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool.TryParse(value.ToString(), out bool bRet);
-            if(bRet)
+            bool.TryParse(value?.ToString(), out bool bRet);
+            if (bRet)
             {
-                return Visibility.Collapsed;
+                return (Brush)Application.Current.Resources["ModuleReadyColor"];
             }
             else
             {
-                return Visibility.Visible;
+                return (Brush)Application.Current.Resources["DisabledColor"];
             }
         }
 
@@ -26,4 +27,3 @@ namespace UI.Converts
         }
     }
 }
- 
