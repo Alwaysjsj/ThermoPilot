@@ -5,7 +5,7 @@ namespace Core.Language
 {
     public class LanguageManager
     {
-        private static string _language = "en";
+        private static string _languageType = "en";
 
         private static readonly ResourceManager? _resourceManagerPhrase = 
             new ResourceManager(
@@ -52,7 +52,27 @@ namespace Core.Language
 
         public static string GetString(string prefix,string key)
         {
+            return GetValue($"{prefix}.{key}");
+        }
 
+        public static void ChangeLanguage(string cultureCode)
+        {
+            if(cultureCode.ToLower() == "en")
+            {
+                _languageType = "en";
+            }
+
+            if(cultureCode.ToLower() == "cn")
+            {
+                _languageType = "zh-CN";
+            }
+
+            LanguageChanged?.Invoke();
+        }
+
+        public static string GetLanguage()
+        {
+            return _languageType.ToUpper();
         }
     }
 }
