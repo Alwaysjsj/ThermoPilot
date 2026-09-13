@@ -249,9 +249,7 @@ namespace Core.Recipe
         {
         }
 
-        public RecipeNodeItem(
-    DirectoryInfo directory,
-    RecipeNodeItem? parent)
+        public RecipeNodeItem(DirectoryInfo directory,RecipeNodeItem? parent)
         {
             Name = directory.Name;
 
@@ -263,9 +261,11 @@ namespace Core.Recipe
 
             SubNodes = [];
 
-            var directories =
-                directory.GetDirectories()
-                    .OrderBy(x => x.CreationTime);
+           var directories = 
+                parent == null
+                ? GetSortedDirectories(directory)
+                : directory.GetDirectories()
+                .OrderBy(x => x.CreationTime);
 
             foreach (var subDirectory in directories)
             {
@@ -273,6 +273,14 @@ namespace Core.Recipe
                     new RecipeNodeItem(
                         subDirectory,
                         this));
+            }
+
+            foreach(var file in directory.GetFiles())
+            {
+                SubNodes.Add(new RecipeNodeItem(
+                    file,
+                    this,
+                    false));
             }
         }
 
@@ -330,7 +338,38 @@ namespace Core.Recipe
 
             recipeData.Header["IsCheck"] = false.ToString();
 
+            recipeData.Header["Password"] = string.Empty;
+
+            recipeData.Header["LockedBy"] = string.Empty;
+
+            var configs = RecipeManager.Instance.GetConfigNames(recipeType);
+
+            foreach (var item in configs) 
+            {
+                recipeData.Config[item] = string.Empty;
+            }
+
             return recipeData.ToJsonString();
+        }
+
+        private IEnumerable<DirectoryInfo> GetSortedDirectories(DirectoryInfo directory)
+        {
+            return directory.GetDirectories().OrderBy(x => x.CreationTime);
+        }
+
+        public void Load()
+        {
+            if (File.Exists(FullPath))
+            {
+                LoadFromContent(File.ReadAllText(FullPath));
+            }
+        }
+
+        public void LoadFromContent(string content)
+        {
+            var recipeData = RecipeData.FromJsonString(content);
+
+            RecipeData?.Copy(recipeData);
         }
     }
 }

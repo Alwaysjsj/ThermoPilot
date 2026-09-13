@@ -1,10 +1,13 @@
 ﻿using Core.Common;
+using System.Collections.ObjectModel;
 
 namespace Core.Recipe
 {
     public class RecipeManager : Singleton<RecipeManager>
     {
         private readonly string _rootPath;
+
+        private readonly RecipeNodeItem? _recipeNodeItem;
 
         public RecipeManager()
         {
@@ -16,6 +19,8 @@ namespace Core.Recipe
                 Directory.CreateDirectory(rootFolder);
 
             _rootPath = directory.FullName;
+
+            _recipeNodeItem = new RecipeNodeItem(directory, null);
         }
 
         public string GetRootPath()
@@ -51,5 +56,32 @@ namespace Core.Recipe
             File.WriteAllText(fullFilePath, content);
         }
 
+        public IEnumerable<string> GetConfigNames(string recipeType)
+        {
+            return [];
+        }
+
+        public ObservableCollection<RecipeNodeItem>? GetRecipes()
+        {
+            return _recipeNodeItem?.SubNodes;
+        }
+
+        public void InitTree(RecipeNodeItem? node)
+        {
+            if(node == null)
+            {
+                return;
+            }
+
+            node.IsSelected = false;
+
+            if(node.IsSelected != null)
+            {
+                foreach(var child in node.SubNodes)
+                {
+                    InitTree(child);
+                }
+            }
+        }
     }
 }
