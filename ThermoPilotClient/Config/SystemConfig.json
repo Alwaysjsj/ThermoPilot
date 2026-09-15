@@ -1,0 +1,31 @@
+﻿{
+  "Recipe": {
+    "RecipeFileFormat": {
+      "Value": ".rp",
+      "Desc": "Recipe File Format",
+      "Min": "",
+      "Max": "",
+      "Unit": "",
+      "Type": "String",
+      "Parameter": "",
+      "Tag": "",
+      "IsBaseOnLocal": false,
+      "IsVisible": false,
+      "IsNeedRestart": false
+    },
+
+    "RecipeType": {
+      "Value": "Flow,Coat,Develop,ADH,HotPlate,Cool,System,Pump,Dummy,Wash",
+      "Desc": "Recipe Type",
+      "Min": "",
+      "Max": "",
+      "Unit": "",
+      "Type": "String",
+      "Parameter": "",
+      "Tag": "",
+      "IsBaseOnLocal": false,
+      "IsVisible": false,
+      "IsNeedRestart": false
+    }
+  }
+}

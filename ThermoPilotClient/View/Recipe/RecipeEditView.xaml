@@ -1,0 +1,252 @@
+﻿<UserControl x:Class="ThermoPilotClient.View.Recipe.RecipeEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <UserControl.Resources>
+
+        <Style x:Key="RecipeActionButtonStyle" TargetType="Button">
+
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="BorderBrush" Value="#D1D5DB" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F3F4F6" />
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#9CA3AF" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#E5E7EB" />
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#6B7280" />
+
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+
+                                <Setter TargetName="ButtonBorder" Property="Background" Value="#F9FAFB" />
+                                <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#E5E7EB" />
+                                <Setter Property="Foreground" Value="#9CA3AF" />
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="RecipeDataGridHeaderStyle" TargetType="DataGridColumnHeader">
+
+            <Setter Property="Height" Value="38" />
+            <Setter Property="Background" Value="#F3F4F6" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="BorderBrush" Value="#E5E7EB" />
+            <Setter Property="BorderThickness" Value="0,0,1,1" />
+
+        </Style>
+
+        <Style x:Key="RecipeDataGridRowStyle" TargetType="DataGridRow">
+
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="BorderBrush" Value="#E5E7EB" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver" Value="True">
+
+                    <Setter Property="Background" Value="#F9FAFB" />
+
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+
+                    <Setter Property="Background" Value="#E5E7EB" />
+                    <Setter Property="Foreground" Value="#111827" />
+
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+        <Style x:Key="RecipeDataGridCellStyle" TargetType="DataGridCell">
+
+            <Setter Property="Padding" Value="12,0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+
+        </Style>
+
+        <Style x:Key="RecipeTreeViewItemStyle" TargetType="TreeViewItem">
+
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#374151" />
+            <Setter Property="Padding" Value="6,4" />
+            <Setter Property="Margin" Value="0,2" />
+            <Setter Property="Cursor" Value="Hand" />
+
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Background="#F5F6FA">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260" />
+            <ColumnDefinition Width="5" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="110" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                Background="White"
+                BorderBrush="#E5E7EB"
+                BorderThickness="0,0,1,0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Margin="16,0,0,0"
+                           VerticalAlignment="Center"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="#111827"
+                           Text="Recipes" />
+
+                <TreeView Grid.Row="1"
+                          Margin="8,4,8,8"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          ItemContainerStyle="{StaticResource RecipeTreeViewItemStyle}">
+
+                    <TreeViewItem Header="HotPlate" />
+                    <TreeViewItem Header="Coat" />
+                    <TreeViewItem Header="Develop" />
+                    <TreeViewItem Header="Cool" />
+
+                </TreeView>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2"
+                Padding="16"
+                Background="#F9FAFB">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+
+                    <TextBox Grid.Row="0"
+                             Width="260"
+                             Height="34"
+                             Padding="10,5"
+                             HorizontalAlignment="Left"
+                             VerticalAlignment="Center"
+                             FontSize="14"
+                             Text="Search Recipe" />
+
+                    <Button Width="80"
+                            Height="34"
+                            Margin="10,0,0,0"
+                            Content="Search" />
+
+                </StackPanel>
+
+                <DataGrid Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          Background="White"
+                          BorderBrush="#E5E7EB"
+                          BorderThickness="1"
+                          CanUserAddRows="False"
+                          CellStyle="{StaticResource RecipeDataGridCellStyle}"
+                          ColumnHeaderStyle="{StaticResource RecipeDataGridHeaderStyle}"
+                          GridLinesVisibility="Horizontal"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True"
+                          RowStyle="{StaticResource RecipeDataGridRowStyle}">
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Width="2" Header="Name" />
+                        <DataGridTextColumn Width="*" Header="Type" />
+                        <DataGridTextColumn Width="160" Header="Modified Time" />
+                        <DataGridTextColumn Width="2" Header="Description" />
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+        </Border>
+
+        <Border Grid.Column="3"
+                Padding="12"
+                Background="White"
+                BorderBrush="#E5E7EB"
+                BorderThickness="1,0,0,0">
+
+            <StackPanel>
+
+                <Button Content="New" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Delete"
+                        IsEnabled="False"
+                        Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Edit" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Rename" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Copy" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Paste" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Refresh" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Content="Check" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button Height="36" Content="Lock" />
+
+            </StackPanel>
+
+        </Border>
+
+    </Grid>
+
+</UserControl>

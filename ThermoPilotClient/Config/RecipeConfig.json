@@ -1,0 +1,133 @@
+﻿{
+  "FileFormat": {
+    "Flow": {
+      "Step": [ "StepNo", "ModuleType", "ModuleName", "RecipeName" ]
+    },
+
+    "Coat": {
+      "Step": [ "StepNo", "Loop", "Time,(s)", "Speed,(rpm)", "ACC,(rpm/s)", "Dispense", "SArm", "DArm" ],
+      "Config": [ "PumpRecipe", "ExtControl" ]
+    },
+
+    "Develop": {
+      "Step": [ "StepNo", "Loop", "Time,(s)", "Speed", "ACC", "Dispense", "SArm", "DArm" ],
+      "Config": [ "ExtControl" ]
+    },
+
+    "ADH": {
+      "Step": [ "StepNo", "Loop", "Time,(s)", "Dispense" ],
+      "Config": [ "ExtControl" ]
+    },
+
+    "HotPlate": {
+      "Step": [ "StepNo", "Loop", "Time,(s)", "ProcessPosition", "Pin", "Chamber" ],
+      "Config": [ "ExtControl" ]
+    },
+
+    "Cool": {
+      "Step": [ "StepNo", "Loop", "Time,(s)", "Pin" ],
+      "Config": [ "ExtControl" ]
+    },
+
+    "System": {
+      "Step": [ "StepNo", "ControlTarget", "SetVal", "AlmMax", "AlmMin", "StopMax", "StopMin" ]
+    },
+
+    "Pump": {
+      "Step": [ "StepNo", "DispAmout", "DispRate", "DispAcc", "ReloadRate", "Offset", "OpenDelayTime", "CloseDelayTIme" ]
+    },
+
+    "WEE": {
+      "Step": [ "StepNo", "ExpMode", "RefCycle", "RefCycleExpWL", "ExpAngLen", "ExpOption" ]
+    },
+
+    "Dummy": {
+      "Step": [ "WaferCount", "RegularTime,(s)", "Condition", "Timing", "ModuleType", "ModuleName", "Dispense", "RecipeName" ]
+    },
+
+    "Wash": {
+      "Step": [ "WaferCount", "RegularTime,(s)", "Condition", "ModuleType", "ModuleName", "RecipeName" ]
+    }
+  },
+
+  "FieldType": {
+    "StepNo": {
+      "Type": "Label"
+    },
+
+    "ModuleType": {
+      "Type": "Button",
+      "Function": "GetModuleType"
+    },
+
+    "ModuleName": {
+      "Type": "Button",
+      "Function": "GetModuleName"
+    },
+
+    "RecipeName": {
+      "Type": "Button",
+      "Function": "GetRecipeName"
+    },
+
+    "Loop": {
+      "Type": "Button",
+      "Function": "GetLoopString"
+    },
+
+    "ControlTarget": {
+      "Type": "Button",
+      "Function": "GetSystemControl"
+    },
+
+    "Sequence": {
+      "Type": "Button",
+      "Function": "GetSystemControl"
+    },
+
+    "Pin": {
+      "Type": "ComboBox",
+      "Paramater": "Up,Down"
+    },
+
+    "Chamber": {
+      "Type": "ComboBox",
+      "Paramater": "Up,Down"
+    },
+
+    "Condition": {
+      "Type": "ComboBox",
+      "Paramater": "And,Or"
+    },
+
+    "Timing": {
+      "Type": "ComboBox",
+      "Paramater": "PreReceive,PreProcess,PostProcess"
+    },
+
+    "SArm": {
+      "Type": "Button",
+      "Function": "GetArmSet"
+    },
+
+    "DArm": {
+      "Type": "Button",
+      "Function": "GetArmSet"
+    },
+
+    "Dispense": {
+      "Type": "Button",
+      "Function": "GetDispense"
+    },
+
+    "PumpRecipe": {
+      "Type": "Button",
+      "Function": "GetPumpRecipe"
+    },
+
+    "ProcessPosition": {
+      "Type": "ComboBox",
+      "Paramater": "Wait,Contact,Cool,Plate_Cool"
+    }
+  }
+}

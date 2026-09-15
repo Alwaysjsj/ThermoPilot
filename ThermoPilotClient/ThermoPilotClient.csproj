@@ -18,5 +18,4 @@
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\UI\UI.csproj" />
   </ItemGroup>
-
 </Project>
