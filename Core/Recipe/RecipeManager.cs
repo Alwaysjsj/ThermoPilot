@@ -1,6 +1,6 @@
-﻿using Core.Common;
+﻿using System.Collections.ObjectModel;
+using Core.Common;
 using Core.Config;
-using System.Collections.ObjectModel;
 
 namespace Core.Recipe
 {

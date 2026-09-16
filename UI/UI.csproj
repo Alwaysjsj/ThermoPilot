@@ -1,24 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0-windows</TargetFramework>
-		<Nullable>enable</Nullable>
-		<UseWPF>true</UseWPF>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Platforms>AnyCPU;x86</Platforms>
-	</PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
-	  <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro" Version="4.0.212" />
 
-	<ItemGroup>
-	  <ProjectReference Include="..\Core\Core.csproj" />
-	</ItemGroup>
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Geometry\" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj" />
+  </ItemGroup>
 
 </Project>

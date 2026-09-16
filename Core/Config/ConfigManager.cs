@@ -1,5 +1,5 @@
-﻿using Core.Common;
-using System.Text.Json;
+﻿using System.Text.Json;
+using Core.Common;
 
 namespace Core.Config
 {

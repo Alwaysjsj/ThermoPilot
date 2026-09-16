@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="ThermoPilotClient.View.Recipe.RecipeEditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="http://caliburnmicro.com">
 
     <UserControl.Resources>
 
@@ -115,10 +116,20 @@
         <Style x:Key="RecipeTreeViewItemStyle" TargetType="TreeViewItem">
 
             <Setter Property="FontSize" Value="14" />
+
             <Setter Property="Foreground" Value="#374151" />
+
+            <Setter Property="Background" Value="Transparent" />
+
             <Setter Property="Padding" Value="6,4" />
+
             <Setter Property="Margin" Value="0,2" />
+
             <Setter Property="Cursor" Value="Hand" />
+
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+
+
             <Setter Property="Template">
                 <Setter.Value>
 
@@ -126,7 +137,33 @@
 
                         <Grid>
 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+
+                            <ToggleButton x:Name="Expander"
+                                          Grid.Row="0"
+                                          Grid.Column="0"
+                                          Width="20"
+                                          Height="20"
+                                          Background="Transparent"
+                                          BorderThickness="0"
+                                          Content="▶"
+                                          Cursor="Hand"
+                                          Focusable="False"
+                                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" />
+
+
                             <Border x:Name="ItemBorder"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
                                     Padding="{TemplateBinding Padding}"
                                     Background="{TemplateBinding Background}"
                                     CornerRadius="4">
@@ -135,25 +172,62 @@
 
                             </Border>
 
+
+                            <ItemsPresenter x:Name="ItemsHost"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            Margin="16,2,0,0" />
+
                         </Grid>
+
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsExpanded" Value="False">
+
+                                <Setter TargetName="ItemsHost" Property="Visibility" Value="Collapsed" />
+
+                            </Trigger>
+
+
+                            <Trigger Property="IsExpanded" Value="True">
+
+                                <Setter TargetName="Expander" Property="Content" Value="▼" />
+
+                            </Trigger>
+
+
+                            <Trigger Property="HasItems" Value="False">
+
+                                <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
 
                     </ControlTemplate>
 
                 </Setter.Value>
             </Setter>
 
+
             <Style.Triggers>
 
+                <!--  鼠标悬停  -->
                 <Trigger Property="IsMouseOver" Value="True">
 
                     <Setter Property="Background" Value="#F3F4F6" />
 
                 </Trigger>
 
+
+                <!--  当前节点被选中  -->
                 <Trigger Property="IsSelected" Value="True">
 
                     <Setter Property="Background" Value="#E5E7EB" />
+
                     <Setter Property="Foreground" Value="#111827" />
+
                     <Setter Property="FontWeight" Value="SemiBold" />
 
                 </Trigger>
@@ -192,16 +266,25 @@
                            Foreground="#111827"
                            Text="Recipes" />
 
-                <TreeView Grid.Row="1"
+                <TreeView x:Name="RecipeTree"
+                          Grid.Row="1"
                           Margin="8,4,8,8"
                           Background="Transparent"
                           BorderThickness="0"
-                          ItemContainerStyle="{StaticResource RecipeTreeViewItemStyle}">
+                          ItemContainerStyle="{StaticResource RecipeTreeViewItemStyle}"
+                          ItemsSource="{Binding RecipeNodes}"
+                          cal:Message.Attach="[Event MouseDown] = [Action TreeView_SelectedItemChanged($this)];
+                          [Event SelectedItemChanged] = [Action TreeView_SelectedItemChanged($this)]">
 
-                    <TreeViewItem Header="HotPlate" />
-                    <TreeViewItem Header="Coat" />
-                    <TreeViewItem Header="Develop" />
-                    <TreeViewItem Header="Cool" />
+                    <TreeView.ItemTemplate>
+
+                        <HierarchicalDataTemplate ItemsSource="{Binding SubNodes}">
+
+                            <TextBlock Text="{Binding Name}" />
+
+                        </HierarchicalDataTemplate>
+
+                    </TreeView.ItemTemplate>
 
                 </TreeView>
             </Grid>
@@ -248,6 +331,7 @@
                           GridLinesVisibility="Horizontal"
                           HeadersVisibility="Column"
                           IsReadOnly="True"
+                          ItemsSource="{Binding SelectedItem.SubNodes, ElementName=RecipeTree}"
                           RowStyle="{StaticResource RecipeDataGridRowStyle}">
 
                     <DataGrid.Columns>
@@ -271,7 +355,10 @@
 
             <StackPanel>
 
-                <Button Content="New" Style="{StaticResource RecipeActionButtonStyle}" />
+                <Button cal:Message.Attach="New"
+                        Click="Button_Click"
+                        Content="New"
+                        Style="{StaticResource RecipeActionButtonStyle}" />
                 <Button Content="Delete"
                         IsEnabled="False"
                         Style="{StaticResource RecipeActionButtonStyle}" />
