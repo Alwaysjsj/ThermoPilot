@@ -1,22 +1,46 @@
 ﻿using System.Collections.ObjectModel;
 using Core.Recipe;
+using UI.Common;
 
 namespace ThermoPilotClient.View.Recipe
 {
-    public class RecipeEditViewModel
+    public class RecipeEditViewModel : ViewModelBase
     {
-        public ObservableCollection<RecipeNodeItem>? RecipeNodes { get; set; }
+        private ObservableCollection<RecipeNodeItem>? _recipeNodes;
 
-        public RecipeNodeItem? SelectedNode { get; set; } //当前选中的Recipe节点
+        private RecipeNodeItem? _selectedNode;
+
+
+        public ObservableCollection<RecipeNodeItem>? RecipeNodes
+        {
+            get => _recipeNodes;
+
+            set
+            {
+                _recipeNodes = value;
+                NotifyOfPropertyChange(nameof(RecipeNodes));
+            }
+        }
+
+        public RecipeNodeItem? SelectedNode
+        {
+            get => _selectedNode;
+
+            set
+            {
+                _selectedNode = value;
+                NotifyOfPropertyChange(nameof(SelectedNode));
+            }
+        }
+
 
         public RecipeEditViewModel()
         {
-            RecipeNodes = RecipeManager.Instance.GetRecipes();
-        }
+            ModuleName = "Recipe";
 
-        public void New()
-        {
-            System.Diagnostics.Debug.WriteLine("Recipe New");
+            Header_Name = "Recipe Edit";
+
+            RecipeNodes = RecipeManager.Instance.GetRecipes();
         }
     }
 }

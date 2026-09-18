@@ -356,7 +356,6 @@
             <StackPanel>
 
                 <Button cal:Message.Attach="New"
-                        Click="Button_Click"
                         Content="New"
                         Style="{StaticResource RecipeActionButtonStyle}" />
                 <Button Content="Delete"

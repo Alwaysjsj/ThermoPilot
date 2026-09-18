@@ -1,0 +1,25 @@
+﻿[
+  {
+    "Name": "Recipe",
+    "ViewModelType": "RecipeEditViewModel",
+    "Icon": "Recipe",
+    "Order": 1,
+    "IsVisible": true
+  },
+
+  {
+    "Name": "Device",
+    "ViewModelType": "DeviceViewModel",
+    "Icon": "Device",
+    "Order": 2,
+    "IsVisible": true
+  },
+
+  {
+    "Name": "Alarm",
+    "ViewModelType": "AlarmViewModel",
+    "Icon": "Alarm",
+    "Order": 3,
+    "IsVisible": true
+  }
+]

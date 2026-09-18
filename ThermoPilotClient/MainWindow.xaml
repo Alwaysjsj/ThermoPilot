@@ -1,19 +1,7 @@
 ﻿<Window x:Class="ThermoPilotClient.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:recipe="clr-namespace:ThermoPilotClient.View.Recipe"
-        Title="ThermoPilot"
-        Width="1400"
-        Height="850"
-        MinWidth="1100"
-        MinHeight="700"
-        Background="#F5F6FA"
-        WindowStartupLocation="CenterScreen">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Grid>
-
-        <recipe:RecipeEditView />
-
-    </Grid>
+    <Grid />
 
 </Window>

@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="ThermoPilotClient.View.Device.DeviceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Grid>
+
+        <TextBlock HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="30"
+                   Text="Device Page" />
+
+    </Grid>
+
+
+</UserControl>
